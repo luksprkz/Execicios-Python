@@ -1,0 +1,10 @@
+x = int(input('Número 1:'))
+y = int(input('Número 2:'))
+z = float(input('Número 3:'))
+
+a = int((x*2)*(y/2))
+print(a)
+b = int((x*3)+z)
+print(b)
+c = int(z**3)
+print(c)
