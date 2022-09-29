@@ -1,13 +1,13 @@
-CARRO = [ #Matriz de possíveis atributos do automóvel 
+CAR = [ #Matriz de possíveis atributos do automóvel 
     [], #lista para adicionar os itens do pedido
     ['Pálio', 'Gol', 'Siena', 'Hb20', 'Hilux', 'S10', 'Hilux'],
     ['Vermelha', 'Prata', 'Preta', 'Azul', 'Branca'],
     ['Fosco', 'Metálica', 'Sólida', 'Perolizada'],
     ['Vidro Elétrico', 'Ar-Condicionado', 'Direção Hidráulica', 'Câmbio Automático', 'Banco De Couro'],
-    [] #lista para somar o valor final do pedido
+    [] #lista para o valor final do pedido
 ]
 
-PRECOS = { #Dicionário de preços
+PRICES = { #Dicionário de preços
     'Pálio':1000, 
     'Gol':2000, 
     'Siena':3000, 
@@ -30,48 +30,54 @@ PRECOS = { #Dicionário de preços
     'Banco De Couro':50, 
 }
 
-def funcao(escolha, numero): #função para loop para escolhas
+def function(choice, number): #função para loop para choices
+
     while True:
-        lista(numero)
-        if numero == 4:
-            check = all(item in CARRO[0] for item in CARRO[4])
+
+        funcList(number)
+
+        if number == 4:
+            check = all(item in CAR[0] for item in CAR[4])
             if check is True:
                 print('\nVocê adicionou todos os opcionais disponíveis ao seu pedido.')
                 break
-            opcional = input('\n Deseja acrescentrar algum opcional? \n S / N ')
-            opcional = opcional.upper()
-            if opcional == 'N': 
+            optional = input('\n Deseja acrescentrar algum opcional? \n S / N ')
+            optional = optional.upper()
+            if optional == 'N': 
                 break 
-        escolha = input('\nQual você prefere? ')
-        escolha = escolha.title()
-        if escolha in CARRO[numero]:
-            CARRO[0].append(escolha)
-            CARRO[5].append(PRECOS.get(escolha))
-            print(f'\n{escolha} adicionado ao seu pedido!')
-            if numero !=4: break
+
+        choice = input('\nQual você prefere? ')
+        choice = choice.title()
+
+        if choice in CAR[number]:
+            CAR[0].append(choice)
+            CAR[5].append(PRICES.get(choice))
+            print(f'\n{choice} adicionado ao seu pedido!')
+            if number !=4: break
         else:
             print('\nEscolha inválida, digite uma opção disponível')
 
-def lista(numero): #função modificadora da primeira função
-    if numero != 4:
-        print('Opções disponíveis: ') 
-        for indice, opcoes in enumerate(CARRO[numero]):
-            print(f'{indice}: {opcoes}')
+def funcList(number): #função modificadora da primeira função
+
+    if number != 4:
+        print('Opções disponíveis: ')
+        CAR[number].sort() 
+        for index, opcoes in enumerate(CAR[number]):
+            print(f'{index}: {opcoes}')
     else:  
         print('Opcionais disponíveis: ') 
-        for indice, opcionais in enumerate(list(set(CARRO[4])-set(CARRO[0]))):
-            print(f'{indice}: {opcionais}')  
+        for index, optionals in enumerate(list(set(CAR[4])-set(CAR[0]))):
+            print(f'{index}: {optionals}')  
         print('Sair')
-while True:  
-       
-    funcao('modelo', 1)
+        
+function('modelo', 1)
 
-    funcao('cor', 2)
+function('cor', 2)
 
-    funcao('pintura', 3)
+function('pintura', 3)
 
-    funcao('opcional', 4)
+function('opcional', 4)
 
-    print(f"\nSeu pedido foi: \n{', '.join(CARRO[0][0:3])}. \nVocê escolheu os opcionais:\n{', '.join(CARRO[0][3:])}. O valor total do pedido é de R${sum(CARRO[5])}")
-    CARRO[0].clear()
-    break
+print(f"\nSeu pedido foi: {', '.join(CAR[0][0:3])}. \n\nVocê escolheu os opcionais: {', '.join(CAR[0][3:])}.\n\nO valor total do pedido é de R${sum(CAR[5])}")
+
+CAR[0].clear()
